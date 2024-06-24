@@ -1,0 +1,287 @@
+{
+    "info": {
+        "_postman_id": "f7923067-343b-4b56-9e9d-0d950b7f3c32",
+        "name": "Todo API Documentation",
+        "description": "API documentation for managing todos with authentication.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Todos",
+            "item": [
+                {
+                    "name": "Create a New Todo",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer your_jwt_token"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Buy groceries\",\n    \"description\": \"Buy milk, bread, and eggs\",\n    \"due_date\": \"2024-07-01T00:00:00.000Z\",\n    \"priority\": \"high\",\n    \"subtasks\": [\n        { \"title\": \"Buy milk\", \"completed\": false },\n        { \"title\": \"Buy bread\", \"completed\": false }\n    ]\n}"
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/todos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "todos"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Todos",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer your_jwt_token"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/todos",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "todos"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update a Todo",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer your_jwt_token"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Buy groceries and fruits\",\n    \"description\": \"Buy milk, bread, eggs, and bananas\",\n    \"due_date\": \"2024-07-02T00:00:00.000Z\",\n    \"priority\": \"high\",\n    \"completed\": true,\n    \"subtasks\": [\n        { \"title\": \"Buy milk\", \"completed\": true },\n        { \"title\": \"Buy bread\", \"completed\": true }\n    ]\n}"
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/todos/:id",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a Todo",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer your_jwt_token"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/todos/:id",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add or Update Subtask",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer your_jwt_token"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Buy bananas\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/todos/:id/subtasks",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id",
+                                "subtasks"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a Subtask",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer your_jwt_token"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/todos/:id/subtasks/:subtaskId",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id",
+                                "subtasks",
+                                ":subtaskId"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Register User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"securepassword123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/users/register",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "users",
+                                "register"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"securepassword123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/users/login",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "users",
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout User",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer your_jwt_token"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/api/users/logout",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "api",
+                                "users",
+                                "logout"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}

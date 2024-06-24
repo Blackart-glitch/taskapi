@@ -79,8 +79,10 @@ router.delete('/:id', auth, async (req, res) => {
         if (todo.userId.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'Unauthorized' });
         }
-
+        //remove all subtasks
+        todo.subtasks = [];
         await todo.remove();
+
         res.json({ msg: 'Todo removed' });
     } catch (err) {
         console.error(err.message);

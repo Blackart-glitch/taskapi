@@ -1,287 +1,294 @@
 {
     "info": {
-        "_postman_id": "f7923067-343b-4b56-9e9d-0d950b7f3c32",
-        "name": "Todo API Documentation",
-        "description": "API documentation for managing todos with authentication.",
+        "name": "Tasker Bot API",
+        "description": "API documentation for Tasker Bot API endpoints.",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-            "name": "Todos",
-            "item": [
-                {
-                    "name": "Create a New Todo",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            },
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer your_jwt_token"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"title\": \"Buy groceries\",\n    \"description\": \"Buy milk, bread, and eggs\",\n    \"due_date\": \"2024-07-01T00:00:00.000Z\",\n    \"priority\": \"high\",\n    \"subtasks\": [\n        { \"title\": \"Buy milk\", \"completed\": false },\n        { \"title\": \"Buy bread\", \"completed\": false }\n    ]\n}"
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/todos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "todos"
-                            ]
-                        }
+            "name": "Create a New Todo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
                     },
-                    "response": []
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"title\": \"Buy groceries\",\n  \"description\": \"Buy milk, bread, and eggs\",\n  \"due_date\": \"2024-07-01T00:00:00.000Z\",\n  \"priority\": \"High\",\n  \"subtasks\": [\n    { \"title\": \"Buy milk\" },\n    { \"title\": \"Buy bread\" },\n    { \"title\": \"Buy eggs\" }\n  ]\n}"
                 },
-                {
-                    "name": "Get All Todos",
-                    "request": {
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer your_jwt_token"
-                            }
-                        ],
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/todos",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "todos"
-                            ]
-                        }
-                    },
-                    "response": []
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos"
+                    ]
                 },
-                {
-                    "name": "Update a Todo",
-                    "request": {
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            },
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer your_jwt_token"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"title\": \"Buy groceries and fruits\",\n    \"description\": \"Buy milk, bread, eggs, and bananas\",\n    \"due_date\": \"2024-07-02T00:00:00.000Z\",\n    \"priority\": \"high\",\n    \"completed\": true,\n    \"subtasks\": [\n        { \"title\": \"Buy milk\", \"completed\": true },\n        { \"title\": \"Buy bread\", \"completed\": true }\n    ]\n}"
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/todos/:id",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "todos",
-                                ":id"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Delete a Todo",
-                    "request": {
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer your_jwt_token"
-                            }
-                        ],
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/todos/:id",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "todos",
-                                ":id"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Add or Update Subtask",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            },
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer your_jwt_token"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"title\": \"Buy bananas\"\n}"
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/todos/:id/subtasks",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "todos",
-                                ":id",
-                                "subtasks"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Delete a Subtask",
-                    "request": {
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer your_jwt_token"
-                            }
-                        ],
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/todos/:id/subtasks/:subtaskId",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "todos",
-                                ":id",
-                                "subtasks",
-                                ":subtaskId"
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
+                "description": "Create a new todo with title, description, due date, priority, and subtasks."
+            },
+            "response": []
         },
         {
-            "name": "Users",
-            "item": [
-                {
-                    "name": "Register User",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"securepassword123\"\n}"
+            "name": "Get All Todos for the Logged-in User with Search and Filter",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos?priority=High&completed=false&due_date=2024-07-01T00:00:00.000Z",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos"
+                    ],
+                    "query": [
+                        {
+                            "key": "priority",
+                            "value": "High"
                         },
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/users/register",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "users",
-                                "register"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Login User",
-                    "request": {
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"securepassword123\"\n}"
+                        {
+                            "key": "completed",
+                            "value": "false"
                         },
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/users/login",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "users",
-                                "login"
-                            ]
+                        {
+                            "key": "due_date",
+                            "value": "2024-07-01T00:00:00.000Z"
                         }
-                    },
-                    "response": []
+                    ]
                 },
-                {
-                    "name": "Logout User",
-                    "request": {
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer your_jwt_token"
-                            }
-                        ],
-                        "url": {
-                            "raw": "http://127.0.0.1:3000/api/users/logout",
-                            "protocol": "http",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "3000",
-                            "path": [
-                                "api",
-                                "users",
-                                "logout"
-                            ]
-                        }
+                "description": "Get all todos for the logged-in user with optional search and filter parameters: priority, completed, and due_date."
+            },
+            "response": []
+        },
+        {
+            "name": "Get a Single Todo",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos",
+                        ":id"
+                    ]
+                },
+                "description": "Get a single todo by its ID."
+            },
+            "response": []
+        },
+        {
+            "name": "Update a Todo",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
                     },
-                    "response": []
-                }
-            ]
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"title\": \"Buy groceries and fruits\",\n  \"description\": \"Buy milk, bread, eggs, and bananas\",\n  \"due_date\": \"2024-07-02T00:00:00.000Z\",\n  \"priority\": \"High\",\n  \"completed\": true,\n  \"subtasks\": [\n    { \"title\": \"Buy milk\" },\n    { \"title\": \"Buy bread\" },\n    { \"title\": \"Buy eggs\" }\n  ]\n}"
+                },
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos",
+                        ":id"
+                    ]
+                },
+                "description": "Update a todo with new title, description, due date, priority, completed status, and subtasks."
+            },
+            "response": []
+        },
+        {
+            "name": "Delete a Todo",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos",
+                        ":id"
+                    ]
+                },
+                "description": "Delete a todo by its ID."
+            },
+            "response": []
+        },
+        {
+            "name": "Add or Update Subtasks in a Todo",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n  { \"title\": \"Buy milk\" },\n  { \"title\": \"Buy bread\" }\n]"
+                },
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id/subtasks",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos",
+                        ":id",
+                        "subtasks"
+                    ]
+                },
+                "description": "Add or update subtasks in a todo. Ensure the title doesn't match any of the existing subtasks in the todo."
+            },
+            "response": []
+        },
+        {
+            "name": "Update a Subtask's Completed Status",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{ \"completed\": true }"
+                },
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:todoId/subtasks/:subtaskId",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos",
+                        ":todoId",
+                        "subtasks",
+                        ":subtaskId"
+                    ]
+                },
+                "description": "Update a subtask's completed status by its ID."
+            },
+            "response": []
+        },
+        {
+            "name": "Delete a Subtask from a Todo",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer <your_jwt_token>",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id/subtasks/:subtaskId",
+                    "protocol": "http",
+                    "host": [
+                        "taskerbot",
+                        "azurewebsites",
+                        "net"
+                    ],
+                    "path": [
+                        "api",
+                        "todos",
+                        ":id",
+                        "subtasks",
+                        ":subtaskId"
+                    ]
+                },
+                "description": "Delete a subtask from a todo by its ID."
+            },
+            "response": []
         }
     ]
 }

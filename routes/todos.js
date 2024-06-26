@@ -134,9 +134,9 @@ router.delete('/:id', auth, async (req, res) => {
     }
 });
 
-// Add or Update a subtask in a Todo
+// Add or Update subtasks in a Todo
 router.post('/:id/subtasks', auth, async (req, res) => {
-    const { title } = req.body;
+    const subtasks = req.body; // Assuming req.body is an array of subtasks
     try {
         const todo = await Todo.findById(req.params.id);
         if (!todo) return res.status(404).json({ msg: 'Todo not found' });
@@ -145,12 +145,48 @@ router.post('/:id/subtasks', auth, async (req, res) => {
             return res.status(401).json({ msg: 'Unauthorized' });
         }
 
-        const newSubtask = {
-            title,
-            completed: false
-        };
+        // Validate and process each subtask in the array
+        for (let subtask of subtasks) {
+            const { title } = subtask;
 
-        todo.subtasks.push(newSubtask);
+            // Check if any subtask already has the same title
+            const duplicateSubtask = todo.subtasks.find(st => st.title === title);
+            if (duplicateSubtask) {
+                return res.status(400).json({ msg: `Subtask with title '${title}' already exists in the todo` });
+            }
+
+            // Add the new subtask to the todo
+            todo.subtasks.push({
+                title,
+                completed: subtask.completed || false
+            });
+        }
+
+        // Save the updated todo with all new subtasks added
+        await todo.save();
+        res.status(201).json(todo);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// Update a subtask's completed status
+router.put('/:todoId/subtasks/:subtaskId', auth, async (req, res) => {
+    const { completed } = req.body;
+
+    try {
+        const todo = await Todo.findById(req.params.todoId);
+        if (!todo) return res.status(404).json({ msg: 'Todo not found' });
+
+        if (todo.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'Unauthorized' });
+        }
+
+        const subtask = todo.subtasks.id(req.params.subtaskId);
+        if (!subtask) return res.status(404).json({ msg: 'Subtask not found' });
+
+        subtask.completed = true;
         await todo.save();
         res.json(todo);
     } catch (err) {
@@ -189,6 +225,7 @@ router.delete('/:id/subtasks/:subtaskId', auth, async (req, res) => {
         }
         res.status(500).send(message);
     }
+
 });
 
 module.exports = router;

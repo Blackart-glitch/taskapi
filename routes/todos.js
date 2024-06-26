@@ -44,6 +44,23 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
+//get one todo
+router.get('/:id', auth, async (req, res) => {
+    try {
+        const todo = await Todo.findById(req.params.id);
+        if (!todo) return res.status(404).json({ msg: 'Todo not found' });
+
+        if (todo.userId.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'Unauthorized' });
+        }
+
+        res.json(todo);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
 // Update a Todo
 router.put('/:id', auth, async (req, res) => {
     const { title, description, due_date, priority, completed, subtasks } = req.body;

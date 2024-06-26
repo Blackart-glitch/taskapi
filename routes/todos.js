@@ -3,6 +3,7 @@ const auth = require('../middleware/auth');
 const Todo = require('../models/Todo');
 
 const router = express.Router();
+const with_errors = true;
 
 // Create a new Todo
 router.post('/', auth, async (req, res) => {
@@ -22,7 +23,12 @@ router.post('/', auth, async (req, res) => {
         res.json(todo);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        if (with_errors) {
+            var message = err.message;
+        } else {
+            var message = 'Server error';
+        }
+        res.status(500).send(message);
     }
 });
 
@@ -40,7 +46,12 @@ router.get('/', auth, async (req, res) => {
         res.json(todos);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        if (with_errors) {
+            var message = err.message;
+        } else {
+            var message = 'Server error';
+        }
+        res.status(500).send(message);
     }
 });
 
@@ -57,7 +68,12 @@ router.get('/:id', auth, async (req, res) => {
         res.json(todo);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        if (with_errors) {
+            var message = err.message;
+        } else {
+            var message = 'Server error';
+        }
+        res.status(500).send(message);
     }
 });
 
@@ -83,7 +99,12 @@ router.put('/:id', auth, async (req, res) => {
         res.json(todo);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        if (with_errors) {
+            var message = err.message;
+        } else {
+            var message = 'Server error';
+        }
+        res.status(500).send(message);
     }
 });
 
@@ -98,12 +119,18 @@ router.delete('/:id', auth, async (req, res) => {
         }
         //remove all subtasks
         todo.subtasks = [];
-        await todo.remove();
+
+        await Todo.deleteOne({ _id: req.params.id });
 
         res.json({ msg: 'Todo removed' });
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        if (with_errors) {
+            var message = err.message;
+        } else {
+            var message = 'Server error';
+        }
+        res.status(500).send(message);
     }
 });
 
@@ -128,7 +155,12 @@ router.post('/:id/subtasks', auth, async (req, res) => {
         res.json(todo);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        if (with_errors) {
+            var message = err.message;
+        } else {
+            var message = 'Server error';
+        }
+        res.status(500).send(message);
     }
 });
 
@@ -150,7 +182,12 @@ router.delete('/:id/subtasks/:subtaskId', auth, async (req, res) => {
         res.json(todo);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        if (with_errors) {
+            var message = err.message;
+        } else {
+            var message = 'Server error';
+        }
+        res.status(500).send(message);
     }
 });
 

@@ -6,289 +6,393 @@
     },
     "item": [
         {
-            "name": "Create a New Todo",
-            "request": {
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
-                    },
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n  \"title\": \"Buy groceries\",\n  \"description\": \"Buy milk, bread, and eggs\",\n  \"due_date\": \"2024-07-01T00:00:00.000Z\",\n  \"priority\": \"High\",\n  \"subtasks\": [\n    { \"title\": \"Buy milk\" },\n    { \"title\": \"Buy bread\" },\n    { \"title\": \"Buy eggs\" }\n  ]\n}"
-                },
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos"
-                    ]
-                },
-                "description": "Create a new todo with title, description, due date, priority, and subtasks."
-            },
-            "response": []
-        },
-        {
-            "name": "Get All Todos for the Logged-in User with Search and Filter",
-            "request": {
-                "method": "GET",
-                "header": [
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos?priority=High&completed=false&due_date=2024-07-01T00:00:00.000Z",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos"
-                    ],
-                    "query": [
-                        {
-                            "key": "priority",
-                            "value": "High"
+            "name": "User Management",
+            "item": [
+                {
+                    "name": "Register a New User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\"\n}"
                         },
-                        {
-                            "key": "completed",
-                            "value": "false"
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/users/register",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                "register"
+                            ]
                         },
-                        {
-                            "key": "due_date",
-                            "value": "2024-07-01T00:00:00.000Z"
-                        }
-                    ]
-                },
-                "description": "Get all todos for the logged-in user with optional search and filter parameters: priority, completed, and due_date."
-            },
-            "response": []
-        },
-        {
-            "name": "Get a Single Todo",
-            "request": {
-                "method": "GET",
-                "header": [
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos",
-                        ":id"
-                    ]
-                },
-                "description": "Get a single todo by its ID."
-            },
-            "response": []
-        },
-        {
-            "name": "Update a Todo",
-            "request": {
-                "method": "PUT",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
+                        "description": "Register a new user with username, email, and password."
                     },
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n  \"title\": \"Buy groceries and fruits\",\n  \"description\": \"Buy milk, bread, eggs, and bananas\",\n  \"due_date\": \"2024-07-02T00:00:00.000Z\",\n  \"priority\": \"High\",\n  \"completed\": true,\n  \"subtasks\": [\n    { \"title\": \"Buy milk\" },\n    { \"title\": \"Buy bread\" },\n    { \"title\": \"Buy eggs\" }\n  ]\n}"
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos",
-                        ":id"
-                    ]
-                },
-                "description": "Update a todo with new title, description, due date, priority, completed status, and subtasks."
-            },
-            "response": []
-        },
-        {
-            "name": "Delete a Todo",
-            "request": {
-                "method": "DELETE",
-                "header": [
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos",
-                        ":id"
-                    ]
-                },
-                "description": "Delete a todo by its ID."
-            },
-            "response": []
-        },
-        {
-            "name": "Add or Update Subtasks in a Todo",
-            "request": {
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
+                {
+                    "name": "Login User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/users/login",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                "login"
+                            ]
+                        },
+                        "description": "Login user with email and password."
                     },
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "[\n  { \"title\": \"Buy milk\" },\n  { \"title\": \"Buy bread\" }\n]"
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id/subtasks",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos",
-                        ":id",
-                        "subtasks"
-                    ]
-                },
-                "description": "Add or update subtasks in a todo. Ensure the title doesn't match any of the existing subtasks in the todo."
-            },
-            "response": []
-        },
-        {
-            "name": "Update a Subtask's Completed Status",
-            "request": {
-                "method": "PUT",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
+                {
+                    "name": "Logout User",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/users/logout",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                "logout"
+                            ]
+                        },
+                        "description": "Logout the current user."
                     },
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{ \"completed\": true }"
-                },
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:todoId/subtasks/:subtaskId",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos",
-                        ":todoId",
-                        "subtasks",
-                        ":subtaskId"
-                    ]
-                },
-                "description": "Update a subtask's completed status by its ID."
-            },
-            "response": []
+                    "response": []
+                }
+            ]
         },
         {
-            "name": "Delete a Subtask from a Todo",
-            "request": {
-                "method": "DELETE",
-                "header": [
-                    {
-                        "key": "Authorization",
-                        "value": "Bearer <your_jwt_token>",
-                        "type": "text"
-                    }
-                ],
-                "url": {
-                    "raw": "http://taskerbot.azurewebsites.net/api/todos/:id/subtasks/:subtaskId",
-                    "protocol": "http",
-                    "host": [
-                        "taskerbot",
-                        "azurewebsites",
-                        "net"
-                    ],
-                    "path": [
-                        "api",
-                        "todos",
-                        ":id",
-                        "subtasks",
-                        ":subtaskId"
-                    ]
+            "name": "Todos",
+            "item": [
+                {
+                    "name": "Create a New Todo",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Buy groceries\",\n  \"description\": \"Buy milk, bread, and eggs\",\n  \"due_date\": \"2024-07-01T00:00:00.000Z\",\n  \"priority\": \"High\",\n  \"subtasks\": [\n    { \"title\": \"Buy milk\" },\n    { \"title\": \"Buy bread\" },\n    { \"title\": \"Buy eggs\" }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos"
+                            ]
+                        },
+                        "description": "Create a new todo with title, description, due date, priority, and subtasks."
+                    },
+                    "response": []
                 },
-                "description": "Delete a subtask from a todo by its ID."
-            },
-            "response": []
+                {
+                    "name": "Get All Todos",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos?priority=High&completed=false&due_date=2024-07-01T00:00:00.000Z",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos"
+                            ],
+                            "query": [
+                                {
+                                    "key": "priority",
+                                    "value": "High"
+                                },
+                                {
+                                    "key": "completed",
+                                    "value": "false"
+                                },
+                                {
+                                    "key": "due_date",
+                                    "value": "2024-07-01T00:00:00.000Z"
+                                }
+                            ]
+                        },
+                        "description": "Get all todos for the logged-in user with optional search and filter parameters: priority, completed, and due_date."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get a Single Todo",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id"
+                            ]
+                        },
+                        "description": "Get a single todo by its ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update a Todo",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Buy groceries and fruits\",\n  \"description\": \"Buy milk, bread, eggs, and bananas\",\n  \"due_date\": \"2024-07-02T00:00:00.000Z\",\n  \"priority\": \"High\",\n  \"completed\": true,\n  \"subtasks\": [\n    { \"title\": \"Buy milk\" },\n    { \"title\": \"Buy bread\" },\n    { \"title\": \"Buy eggs\" }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id"
+                            ]
+                        },
+                        "description": "Update a todo with new title, description, due date, priority, completed status, and subtasks."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a Todo",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos/:id",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id"
+                            ]
+                        },
+                        "description": "Delete a todo by its ID."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Subtasks",
+            "item": [
+                {
+                    "name": "Add or Update Subtasks",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\n  { \"title\": \"Buy milk\" },\n  { \"title\": \"Buy bread\" }\n]"
+                        },
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos/:id/subtasks",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id",
+                                "subtasks"
+                            ]
+                        },
+                        "description": "Add or update subtasks in a todo. Ensure the title doesn't match any of the existing subtasks in the todo."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update a Subtask's Completed Status",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{ \"completed\": true }"
+                        },
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos/:todoId/subtasks/:subtaskId",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos",
+                                ":todoId",
+                                "subtasks",
+                                ":subtaskId"
+                            ]
+                        },
+                        "description": "Update a subtask's completed status by its ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a Subtask",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <your_jwt_token>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://taskerbot.azurewebsites.net/api/todos/:id/subtasks/:subtaskId",
+                            "protocol": "http",
+                            "host": [
+                                "taskerbot",
+                                "azurewebsites",
+                                "net"
+                            ],
+                            "path": [
+                                "api",
+                                "todos",
+                                ":id",
+                                "subtasks",
+                                ":subtaskId"
+                            ]
+                        },
+                        "description": "Delete a subtask from a todo by its ID."
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }
